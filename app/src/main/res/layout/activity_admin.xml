@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AdminActivity">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="84dp"
+        android:text="@string/hello_admin"
+        android:textSize="48sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/adminTrails"
+        android:layout_width="197dp"
+        android:layout_height="59dp"
+        android:layout_marginTop="96dp"
+        android:text="@string/manage_trails"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <Button
+        android:id="@+id/locationAdmin"
+        android:layout_width="187dp"
+        android:layout_height="57dp"
+        android:layout_marginTop="40dp"
+        android:text="@string/manage_location"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/adminTrails" />
+
+    <Button
+        android:id="@+id/userAdmin"
+        android:layout_width="206dp"
+        android:layout_height="58dp"
+        android:layout_marginTop="40dp"
+        android:text="@string/manage_user"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/locationAdmin" />
+
+    <Button
+        android:id="@+id/logOutAdmin"
+        android:layout_width="177dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="132dp"
+        android:text="@string/log_out_admin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/userAdmin" />
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
