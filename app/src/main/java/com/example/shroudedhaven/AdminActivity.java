@@ -10,8 +10,10 @@ import android.view.View;
 import com.example.shroudedhaven.databinding.ActivityAdminBinding;
 import com.example.shroudedhaven.databinding.ActivityMainBinding;
 
+import database.TrailsRepository;
+
 public class AdminActivity extends AppCompatActivity {
-    private static final String MAIN_ACTIVITY_USER_ID = "com.example.shroudedhaven.MAIN_ACTIVITY_USER_ID";
+    private static final String ADMIN_ACTIVITY_USER_ID = "com.example.shroudedhaven.ADMIN_ACTIVITY_USER_ID";
     private ActivityAdminBinding binding;
 
     public static final String TAG = "DAC_HIKER";
@@ -24,6 +26,8 @@ public class AdminActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityAdminBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        //TODO: When swapping to admin page, make sure to stay logged into USER
 
 //        loginUser();
 //
@@ -41,15 +45,23 @@ public class AdminActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        binding.adminTrails.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AdminActivity.this, TrailsActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void loginUser() {
-        loggedInUserId = getIntent().getIntExtra(MAIN_ACTIVITY_USER_ID, -1);
+        loggedInUserId = getIntent().getIntExtra(ADMIN_ACTIVITY_USER_ID, -1);
     }
 
-    static Intent mainActivityIntentFactory(Context context, int userId){
+    static Intent adminActivityIntentFactory(Context context, int userId){
         Intent intent = new Intent(context, MainActivity.class);
-        intent.putExtra(MAIN_ACTIVITY_USER_ID, userId);
+        intent.putExtra(ADMIN_ACTIVITY_USER_ID, userId);
         return intent;
     }
 }

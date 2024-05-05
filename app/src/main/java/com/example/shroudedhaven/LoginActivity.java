@@ -12,7 +12,7 @@ import android.widget.Toast;
 import com.example.shroudedhaven.databinding.ActivityLoginBinding;
 
 import database.Repository;
-import database.entities.Hiker;
+import database.entities.User;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -43,7 +43,7 @@ public class LoginActivity extends AppCompatActivity {
             Toast.makeText(this, "Username may not be blank.", Toast.LENGTH_SHORT).show();
             return;
         }
-        LiveData<Hiker> hikerObserver = repository.getHikerByHikerName(hikername);
+        LiveData<User> hikerObserver = repository.getUserByUsername(hikername);
         hikerObserver.observe(this, hiker -> {
             if (hiker != null){
                 String password = binding.passwordLoginEditText.getText().toString();
@@ -69,7 +69,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void loginSuccessful(int userId) {
-        Intent intent = AdminActivity.mainActivityIntentFactory(this, userId);
+        Intent intent = AdminActivity.adminActivityIntentFactory(this, userId);
         startActivity(intent);
         finish();
     }

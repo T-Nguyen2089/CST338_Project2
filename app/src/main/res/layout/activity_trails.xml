@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/trailsTextView"
+        android:layout_width="match_parent"
+        android:layout_height="150dip"
+        android:gravity="center"
+        android:text="@string/trails"
+        android:textSize="48sp"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/trailsListView"
+        android:layout_width="395dp"
+        android:layout_height="294dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="8dp"
+        android:inputType="textMultiLine"
+        android:gravity="top|start"
+        android:scrollbars="vertical"
+        android:padding="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/trailsTextView" />
+    <TextView
+        android:id="@+id/trailLabelTextView"
+        android:layout_width="85dp"
+        android:layout_height="29dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/trail"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/trailsListView" />
+
+    <EditText
+        android:id="@+id/trailInputEditText"
+        android:layout_width="265dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="32dp"
+        android:hint="@string/enter_the_trail"
+        android:inputType="textAutoComplete"
+        android:padding="8dp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/trailLabelTextView"
+        app:layout_constraintStart_toEndOf="@id/trailLabelTextView" />
+
+    <TextView
+        android:id="@+id/lengthLabelTextView"
+        android:layout_width="83dp"
+        android:layout_height="31dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:text="Length"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/trailLabelTextView" />
+
+    <EditText
+        android:id="@+id/lengthInputEditText"
+        android:layout_width="265dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="34dp"
+        android:hint="Enter the Length (Miles)"
+        android:inputType="number|numberDecimal"
+        android:padding="8dp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/lengthLabelTextView"
+        app:layout_constraintStart_toEndOf="@id/lengthLabelTextView" />
+
+    <TextView
+        android:id="@+id/descriptionLableTextView"
+        android:layout_width="110dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:text="Description"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lengthLabelTextView" />
+
+    <EditText
+        android:id="@+id/descriptionEditTextView"
+        android:layout_width="265dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="8dp"
+        android:hint="Enter the Description"
+        android:inputType="textAutoComplete"
+        android:padding="8dp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/descriptionLableTextView"
+        app:layout_constraintStart_toEndOf="@+id/descriptionLableTextView" />
+
+    <Button
+        android:id="@+id/submitButton"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="36dp"
+        android:text="Submit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/descriptionEditTextView" />
+</androidx.constraintlayout.widget.ConstraintLayout>

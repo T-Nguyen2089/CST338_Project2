@@ -15,4 +15,10 @@
     <string name="list_of_trails">List of Trails</string>
     <string name="search">Search</string>
     <string name="saved_trails">Saved Trails</string>
+    <string name="trails">Trails</string>
+    <string name="trail">Trail</string>
+    <string name="enter_the_trail">Enter the Trail</string>
+    <string name="length">length</string>
+    <string name="enter_the_length">Enter the Length</string>
+    <string name="no_saved_trails">No saved trails.</string>
 </resources>

@@ -11,20 +11,20 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
-import database.entities.Hiker;
+import database.entities.User;
 
 public class Repository {
-    private final HikerDAO hikerDAO;
+    private final UserDao userDao;
 
     public Repository(Application application) {
         DataBase db = DataBase.getDataBase(application);
-        this.hikerDAO = db.hikerDAO();
+        this.userDao = db.userDAO();
     }
 
-    public void insertHiker(Hiker... hiker) {
+    public void insertUser(User... user) {
         DataBase.databaseWriteExecutor.execute(() ->
         {
-            hikerDAO.insert(hiker);
+            userDao.insert(user);
         });
     }
 
@@ -45,7 +45,7 @@ public class Repository {
         return null;
     }
 
-    public LiveData<Hiker> getHikerByHikerName(String hikername) {
-        return hikerDAO.getHikerByHikerName(hikername);
+    public LiveData<User> getUserByUsername(String username) {
+        return userDao.getUserByUsername(username);
     }
 }

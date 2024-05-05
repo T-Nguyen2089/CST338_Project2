@@ -8,14 +8,14 @@ import java.util.Objects;
 import database.DataBase;
 
 @Entity(tableName = DataBase.USER_TABLE)
-public class Hiker {
+public class User {
     @PrimaryKey(autoGenerate = true)
     private int id;
     private String username;
     private String password;
     private boolean isAdmin;
 
-    public Hiker(String username, String password) {
+    public User(String username, String password) {
         this.username = username;
         this.password = password;
         isAdmin = false;
@@ -57,8 +57,8 @@ public class Hiker {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Hiker hiker = (Hiker) o;
-        return id == hiker.id && isAdmin == hiker.isAdmin && Objects.equals(username, hiker.username) && Objects.equals(password, hiker.password);
+        User user = (User) o;
+        return id == user.id && isAdmin == user.isAdmin && Objects.equals(username, user.username) && Objects.equals(password, user.password);
     }
 
     @Override

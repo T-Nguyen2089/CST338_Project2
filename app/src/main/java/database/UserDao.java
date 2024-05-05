@@ -9,23 +9,23 @@ import androidx.room.Query;
 
 import java.util.List;
 
-import database.DataBase;
-import database.entities.Hiker;
+import database.entities.User;
 
 @Dao
-public interface HikerDAO {
+public interface UserDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insert(Hiker... hiker);
+    void insert(User... user);
 
     @Delete
-    void delete(Hiker hiker);
+    void delete(User user);
 
     @Query("SELECT * FROM " + DataBase.USER_TABLE + " ORDER BY username")
-    LiveData<List<Hiker>> getAllHikers();
+    LiveData<List<User>> getAllHikers();
 
     @Query("DELETE from " + DataBase.USER_TABLE)
     void deleteAll();
 
-    @Query("SELECT * from " + DataBase.USER_TABLE + " WHERE username == :hikername")
-    LiveData<Hiker> getHikerByHikerName(String hikername);
+    @Query("SELECT * from " + DataBase.USER_TABLE + " WHERE username == :username")
+
+    LiveData<User> getUserByUsername(String username);
 }
