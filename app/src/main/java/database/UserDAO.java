@@ -12,20 +12,22 @@ import java.util.List;
 import database.entities.User;
 
 @Dao
-public interface UserDao {
+public interface UserDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(User... user);
 
     @Delete
     void delete(User user);
 
-    @Query("SELECT * FROM " + DataBase.USER_TABLE + " ORDER BY username")
-    LiveData<List<User>> getAllHikers();
+    @Query("SELECT * FROM " + UserDatabase.USER_TABLE + " ORDER BY username")
+    LiveData<List<User>> getAllUsers();
 
-    @Query("DELETE from " + DataBase.USER_TABLE)
+    @Query("DELETE from " + UserDatabase.USER_TABLE)
     void deleteAll();
 
-    @Query("SELECT * from " + DataBase.USER_TABLE + " WHERE username == :username")
-
+    @Query("SELECT * from " + UserDatabase.USER_TABLE + " WHERE username == :username")
     LiveData<User> getUserByUsername(String username);
+
+    @Query("SELECT * from " + UserDatabase.USER_TABLE + " WHERE id == :userId")
+    LiveData<User> getUserByUserId(int userId);
 }

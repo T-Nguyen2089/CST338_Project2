@@ -21,4 +21,7 @@
     <string name="length">length</string>
     <string name="enter_the_length">Enter the Length</string>
     <string name="no_saved_trails">No saved trails.</string>
+    <string name="sharedPreference_file_key">daclinkPreferenceFileNameTrails</string>
+    <string name="preference_userId_key">preferenceUserIdKey</string>
+    <string name="edit_trails">Trails</string>
 </resources>

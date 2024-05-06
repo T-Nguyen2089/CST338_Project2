@@ -22,7 +22,7 @@
         android:layout_width="179dp"
         android:layout_height="55dp"
         android:layout_marginTop="96dp"
-        android:text="@string/list_of_trails"
+        android:text="@string/edit_trails"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
@@ -63,7 +63,7 @@
         android:layout_width="113dp"
         android:layout_height="59dp"
         android:layout_marginTop="16dp"
-        android:text="@string/temp_admin"
+        android:text="Admin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.95"
         app:layout_constraintStart_toStartOf="parent"

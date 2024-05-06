@@ -3,10 +3,13 @@ package database;
 import android.app.Application;
 import android.util.Log;
 
+import androidx.lifecycle.LiveData;
+
 import com.example.shroudedhaven.AdminActivity;
 import com.example.shroudedhaven.TrailsActivity;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
@@ -15,13 +18,13 @@ import database.entities.Trails;
 
 public class TrailsRepository {
     private TrailsDAO trailsDAO;
-    private ArrayList<Trails> allLogs;
+    private ArrayList<Trails> allTrails;
     private static TrailsRepository repository;
 
     private TrailsRepository(Application application){
         TrailsDatabase db = TrailsDatabase.getDatabase(application);
         this.trailsDAO = db.trailsDAO();
-        this.allLogs = (ArrayList<Trails>) this.trailsDAO.getAllRecords();
+        this.allTrails = (ArrayList<Trails>) this.trailsDAO.getAllTrails();
     }
 
     public static TrailsRepository getRepository(Application application){
@@ -49,7 +52,7 @@ public class TrailsRepository {
                 new Callable<ArrayList<Trails>>() {
                     @Override
                     public ArrayList<Trails> call() throws Exception {
-                        return (ArrayList<Trails>) trailsDAO.getAllRecords();
+                        return (ArrayList<Trails>) trailsDAO.getAllTrails();
                     }
                 }
         );
@@ -67,10 +70,15 @@ public class TrailsRepository {
             trailsDAO.insert(trails);
         });
     }
-
-//    public LiveData<Trails> getTrailsByTrailsName(String name) {
-//        return TrailsDAO.getTrailsByTrailsName(name);
+//    public LiveData<List<Trails>> getTrailsByTrailsName(String trailsName) {
+//        return trailsDAO.getTrailByTrailName(trailsName);
 //    }
 
 
+//    public ArrayList<Trails> getTrailsByTrailsId(int trailsId) {
+//        return trailsDAO.getTrailsByTrailsId();
+//    }
+
+//    public ArrayList<Trails> getAllTrailsByUserId(int userId) {
+//    }
 }

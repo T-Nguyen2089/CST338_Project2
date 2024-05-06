@@ -8,35 +8,40 @@ import androidx.annotation.NonNull;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.room.TypeConverters;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.example.shroudedhaven.MainActivity;
+import com.example.shroudedhaven.ShroudedHavenApplications;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import database.entities.Trails;
 import database.entities.User;
+import database.typeConverters.LocalDateTypeConverter;
 
-@Database(entities = {User.class}, version = 1, exportSchema = false)
-public abstract class DataBase extends RoomDatabase {
+@TypeConverters(LocalDateTypeConverter.class)
+@Database(entities = {User.class}, version = 2, exportSchema = false)
+public abstract class UserDatabase extends RoomDatabase {
 
-    private static final String DATABASE_NAME = "database";
-    public static final String USER_TABLE = "user_table";
-    private static volatile DataBase INSTANCE;
+    private static final String DATABASE_NAME = "User_database";
+    public static final String USER_TABLE = "userTable";
+    private static volatile UserDatabase INSTANCE;
 
     private static final int NUMBER_OF_THREADS = 4;
 
     static final ExecutorService databaseWriteExecutor = Executors.newFixedThreadPool(NUMBER_OF_THREADS);
 
-    static DataBase getDataBase(final Context context) {
+    static UserDatabase getDataBase(final Context context) {
         if (INSTANCE == null) {
-            synchronized (DataBase.class) {
+            synchronized (UserDatabase.class) {
                 if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(
                                     context.getApplicationContext(),
-                                    DataBase.class, DATABASE_NAME)
+                                    UserDatabase.class, DATABASE_NAME)
                             .fallbackToDestructiveMigration()
-                            .addCallback(addDefaultValues)
+                            .addCallback(roomDatabaseCallBack)
                             .build();
                 }
             }
@@ -44,13 +49,13 @@ public abstract class DataBase extends RoomDatabase {
         return INSTANCE;
     }
 
-    private static final RoomDatabase.Callback addDefaultValues = new RoomDatabase.Callback() {
+    private static final RoomDatabase.Callback roomDatabaseCallBack = new RoomDatabase.Callback() {
         @Override
         public void onCreate(@NonNull SupportSQLiteDatabase db) {
             super.onCreate(db);
             Log.i(MainActivity.TAG, "DATABASE CREATED!");
             databaseWriteExecutor.execute(() -> {
-                UserDao dao = INSTANCE.userDAO();
+                UserDAO dao = INSTANCE.userDAO();
                 User admin = new User("admin1", "admin1");
                 admin.setAdmin(true);
                 dao.insert(admin);
@@ -61,7 +66,11 @@ public abstract class DataBase extends RoomDatabase {
         }
     };
 
-    public abstract UserDao userDAO();
+    public static void getDatabase(ShroudedHavenApplications shroudedHavenApplications) {
+    }
+
+    public abstract UserDAO userDAO();
+
 
 }
 

@@ -3,37 +3,39 @@ package database.entities;
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
+import androidx.room.TypeConverters;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
 import database.TrailsDatabase;
+import database.typeConverters.LocalDateTypeConverter;
 
+@TypeConverters(LocalDateTypeConverter.class)
 @Entity(tableName = TrailsDatabase.TRAILS_TABLE)
 public class Trails {
     @PrimaryKey(autoGenerate = true)
-    private int id;
+    private int trailsId = 0;
 
-    private String name = "";
+    private String trailName = "";
     private double length = 0.0;
     private String description = "";
     private LocalDateTime date;
 
-    public int getId() {
-        return id;
+    public int getTrailsId() {
+        return trailsId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setTrailsId(int trailsId) {
+        this.trailsId = trailsId;
     }
 
-    public String getName() {
-        return name;
+    public String getTrailName() {
+        return trailName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTrailName(String trailName) {
+        this.trailName = trailName;
     }
 
     public double getLength() {
@@ -60,8 +62,8 @@ public class Trails {
         this.date = date;
     }
 
-    public Trails(String name, double length, String description) {
-        this.name = name;
+    public Trails(String trailName, double length, String description) {
+        this.trailName = trailName;
         this.length = length;
         this.description = description;
         date = LocalDateTime.now();
@@ -70,10 +72,9 @@ public class Trails {
     @NonNull
     @Override
     public String toString() {
-        return  name + '\n' +
+        return  trailName + '\n' +
                 "Length: " + length +'\n' +
                 "Description: " + description + '\n' +
-                "Date:" + date.toString() + '\n' +
                 "======================================\n";
     }
 
@@ -82,11 +83,11 @@ public class Trails {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Trails trails = (Trails) o;
-        return id == trails.id && Double.compare(trails.length, length) == 0 && Objects.equals(name, trails.name) && Objects.equals(description, trails.description) && Objects.equals(date, trails.date);
+        return trailsId == trails.trailsId && Double.compare(trails.length, length) == 0 && Objects.equals(trailName, trails.trailName) && Objects.equals(description, trails.description) && Objects.equals(date, trails.date);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, length, description, date);
+        return Objects.hash(trailsId, trailName, length, description, date);
     }
 }

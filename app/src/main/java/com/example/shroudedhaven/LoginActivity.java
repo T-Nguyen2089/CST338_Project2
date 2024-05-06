@@ -5,19 +5,23 @@ import androidx.lifecycle.LiveData;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
 import com.example.shroudedhaven.databinding.ActivityLoginBinding;
 
-import database.Repository;
+import database.TrailsRepository;
+import database.UserRepository;
 import database.entities.User;
 
 public class LoginActivity extends AppCompatActivity {
 
     private ActivityLoginBinding binding;
-    private Repository repository;
+
+    private UserRepository userRepository;
+    private TrailsRepository trailsRepository;
 
 
     @Override
@@ -26,7 +30,8 @@ public class LoginActivity extends AppCompatActivity {
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        repository = Repository.getRepository(getApplication());
+        userRepository = UserRepository.getRepository(getApplication());
+        trailsRepository = TrailsRepository.getRepository(getApplication());
 
         binding.loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -37,24 +42,23 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void verifyUser() {
-
-        String hikername = binding.userNameLoginEditText.getText().toString();
-        if (hikername.isEmpty()) {
+        String username = binding.userNameLoginEditText.getText().toString();
+        if (username.isEmpty()) {
             Toast.makeText(this, "Username may not be blank.", Toast.LENGTH_SHORT).show();
             return;
         }
-        LiveData<User> hikerObserver = repository.getUserByUsername(hikername);
-        hikerObserver.observe(this, hiker -> {
-            if (hiker != null){
+        LiveData<User> userObserver = userRepository.getUserByUsername(username);
+        userObserver.observe(this, user -> {
+            if (user != null){
                 String password = binding.passwordLoginEditText.getText().toString();
-                if(password.equals(hiker.getPassword())) {
-                    startActivity(MainActivity.mainActivityIntentFactory(getApplicationContext(),hiker.getId()));
+                if(password.equals(user.getPassword())) {
+                    startActivity(MainActivity.mainActivityIntentFactory(getApplicationContext(),user.getId()));
                 }else{
                     toastMaker("Invalid password");
                     binding.passwordLoginEditText.setSelection(0);
                 }
             }else{
-                toastMaker(String.format("No user %s is not a valid username.", hikername));
+                toastMaker(String.format("No user %s is not a valid username.", username));
                 binding.userNameLoginEditText.setSelection(0);
             }
         });

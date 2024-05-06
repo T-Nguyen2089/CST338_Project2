@@ -5,9 +5,9 @@ import androidx.room.PrimaryKey;
 
 import java.util.Objects;
 
-import database.DataBase;
+import database.UserDatabase;
 
-@Entity(tableName = DataBase.USER_TABLE)
+@Entity(tableName = UserDatabase.USER_TABLE)
 public class User {
     @PrimaryKey(autoGenerate = true)
     private int id;
